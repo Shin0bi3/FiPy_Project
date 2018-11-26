@@ -1,0 +1,37 @@
+import machine
+import time
+from machine import Pin, Timer
+
+b_pin = Pin('G22', mode=Pin.OUT)
+a_pin = Pin('G17', mode=Pin.OUT)
+f_pin = Pin('G16', mode=Pin.OUT)
+g_pin = Pin('G15', mode=Pin.OUT)
+e_pin = Pin('G14', mode=Pin.OUT)
+d_pin = Pin('G13', mode=Pin.OUT)
+c_pin = Pin('G12', mode=Pin.OUT)
+
+while True:
+    a_pin.value(1)
+    b_pin.value(1)
+    c_pin.value(1)
+    d_pin.value(1)
+    e_pin.value(1)
+    f_pin.value(1)
+    g_pin.value(0)
+    time.sleep(1)
+    a_pin.value(0)
+    b_pin.value(1)
+    c_pin.value(1)
+    d_pin.value(0)
+    e_pin.value(0)
+    f_pin.value(0)
+    g_pin.value(0)
+    time.sleep(1)
+    a_pin.value(1)
+    b_pin.value(1)
+    c_pin.value(0)
+    d_pin.value(1)
+    e_pin.value(1)
+    f_pin.value(0)
+    g_pin.value(1)
+    time.sleep(1)

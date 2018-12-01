@@ -3,6 +3,9 @@ import socket
 from machine import Pin, Timer
 from network import LoRa
 
+lora = LoRa(mode=LoRa.LORA, frequency=868300000, bandwidth=LoRa.BW_125KHZ, tx_power=14, sf=12)
+s = socket.socket(socket.AF_LORA, socket.SOCK_RAW)
+
 echo1 = Pin('G22', mode=Pin.IN)
 trigger1 = Pin('G17', mode=Pin.OUT)
 
@@ -25,21 +28,23 @@ e_pin = Pin('G14', mode=Pin.OUT)
 d_pin = Pin('G13', mode=Pin.OUT)
 c_pin = Pin('G12', mode=Pin.OUT)
 '''
+#------------------------------ Network ---------------
+
+
 def networking(count):
 
-    lora = LoRa(mode=LoRa.LORA, frequency=868300000, bandwidth=LoRa.BW_125KHZ, tx_power=14, sf=12)
-    s = socket.socket(socket.AF_LORA, socket.SOCK_RAW)
-    
     s.setblocking(True)
-    #s.send(str(count))
-    s.send("Ping")
+    s.send(str(count).encode("hex"))
+    #s.send("Ping".encode("hex"))
     print("Sending free lot number :", count)
     s.setblocking(False)
-    if s.recv(64) == b"Pong":
-        print("Ack")
+    #if s.recv(64) == b"Pong":
+    #    print("Ack")
     # print('Ping-' + str(count))
     # count += 1
-    time.sleep(0.5)
+    time.sleep(1)
+
+#------------------------------------------------------------
 
 chrono = Timer.Chrono()
 
@@ -149,5 +154,4 @@ while True:
     time.sleep(0.1)
     networking(count)
 
-#------------------------------ Network ---------------
 

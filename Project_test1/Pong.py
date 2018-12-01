@@ -7,7 +7,8 @@ s = socket.socket(socket.AF_LORA, socket.SOCK_RAW)
 s.setblocking(False)
 
 while True:
-    data = s.recv(64)
-    if data == b'Ping':
-        print(data)
+    message = s.recv(64)
+    message = message.decode("hex")
+    if message:
+      print("message =", message)
     time.sleep(1)
